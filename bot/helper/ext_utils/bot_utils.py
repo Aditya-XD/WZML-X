@@ -441,7 +441,7 @@ async def download_image_url(url):
         async with session.get(url) as response:
             if response.status == 200:
                 async with aiopen(des_dir, 'wb') as file:
-                    async for chunk in response.content.iter_chunked(1024):
+                    async for chunk in response.content.iter_chunked(1000000):
                         await file.write(chunk)
                 LOGGER.info(f"Image Downloaded Successfully as {image_name}")
             else:
